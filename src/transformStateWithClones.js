@@ -8,7 +8,7 @@
  */
 function transformStateWithClones(state = {}, actions = []) {
   const states = [];
-  let currentState = { ...state };
+  let currentState = structuredClone(state);
 
   for (const action of actions) {
     if (action.type === 'clear') {
@@ -26,7 +26,7 @@ function transformStateWithClones(state = {}, actions = []) {
         delete currentState[key];
       }
     }
-    states.push(currentState);
+    states.push({ ...currentState });
   }
 
   return states;
